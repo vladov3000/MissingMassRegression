@@ -96,15 +96,11 @@ def fig2(df, model_df):
     # (gen key into df, key for rjr in df and model_df)
     field_names = list(model_df.columns)
 
-    for field in field_names:
-        key = field
-        gen_key = f"{field[:-1]}_Gen{field[-1]}"
-
+    def plot_dis(key, gen_key, binrange):
         save_file = f"figures/fig2_{key}.png"
         if os.path.exists(save_file):
             continue
         print(f"Plotting {save_file}")
-
         sns.histplot(
             {
                 f"{key}_model": model_df[key],
@@ -114,20 +110,10 @@ def fig2(df, model_df):
             alpha=0.5)
 
         plt.savefig(save_file)
-
-        save_file = f"figures/fig2_norm_{key}.png"
-        if os.path.exists(save_file):
-            continue
-        print(f"Plotting {save_file}")
-
-        sns.histplot(
-            {
-                f"{key}_model / truth": model_df[key] / df[gen_key],
-                f"{key}_rjr / truth": df[key] / df[gen_key],
-            },
-            alpha=0.5)
-
-        plt.savefig()
+    
+    plot_dis("Nax", "Na_Genx", (-500, 500))
+    plot_dis("Nay", "Na_Geny", (-500, 500))
+    plot_dis("Nay", "Na_Geny", (-500, 500))
 
 
 def main():
