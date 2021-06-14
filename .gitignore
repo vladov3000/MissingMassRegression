@@ -11,3 +11,4 @@ wlnu-regression
 *.ckpt
 *.pkl
 *.out
+.idea
